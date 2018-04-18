@@ -7,7 +7,7 @@ class Type_Model{
     $conn = FT_Database::instance()->getConnection();
     $sql = 'select * from types';
     $result = mysqli_query($conn, $sql);
-    $list_album = array();
+    $list_type = array();
 
     if(!$result)
       die('Error: '.mysqli_query_error());

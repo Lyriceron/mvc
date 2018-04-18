@@ -8,7 +8,7 @@ class Album_Song_Model{
     $conn = FT_Database::instance()->getConnection();
     $sql = 'select * from album_songs';
     $result = mysqli_query($conn, $sql);
-    $list_playlist_song = array();
+    $list_album_song = array();
 
     if(!$result)
       die('Error: '.mysqli_query_error());
