@@ -1,7 +1,7 @@
 <?php if ( ! defined('PATH_SYSTEM')) die ('Bad requested!');
 
 class FT_Database{
-	
+
 	private $conn;
 
 
@@ -13,17 +13,17 @@ class FT_Database{
             self::$myInstance = new FT_Database();
         }
         return self::$myInstance;
-	}	
+	}
 
 	private function __construct(){
 		$this->db_connect();
-	}	
+	}
 
 	public function db_connect(){
 		$this->conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 		if(!$this->conn){
 			die('Fail connect to database'.mysqli_connect_error());
-		}		
+		}
 	}
 
 	public function getConnection(){
@@ -32,5 +32,5 @@ class FT_Database{
 
 	public function db_close(){
 		mysqli_close($this->conn);
-	}	
+	}
 }
