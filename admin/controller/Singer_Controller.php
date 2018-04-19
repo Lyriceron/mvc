@@ -16,7 +16,7 @@ class Singer_Controller extends Base_Controller
         );
 
         // Load view
-        $this->view->load('singer/index', $data);
+        $this->view->load('singers/index', $data);
     }
 
     /**
@@ -25,7 +25,7 @@ class Singer_Controller extends Base_Controller
     */
     public function show()
     {
-        $this->model->load('singer');
+        $this->model->load('Singer');
         $singer = $this->model->Singer->findById($_GET['id']);
         $data = array(
             'title' => 'show',
@@ -33,7 +33,7 @@ class Singer_Controller extends Base_Controller
         );
 
         // Load view
-        $this->view->load('singer/show', $data);
+        $this->view->load('singers/show', $data);
     }
 
     /**
@@ -42,7 +42,7 @@ class Singer_Controller extends Base_Controller
     */
     public function create()
     {
-        $this->view->load('singer/create');
+        $this->view->load('singers/create');
     }
 
      /**
@@ -51,7 +51,7 @@ class Singer_Controller extends Base_Controller
     */
     public function store()
     {
-        $this->model->load('singer');
+        $this->model->load('Singer');
         $this->model->Singer->name = $_POST['name'];
         $this->model->Singer->mota = $_POST['mota'];
         $this->model->Singer->save();
@@ -73,7 +73,7 @@ class Singer_Controller extends Base_Controller
         );
 
         // Load view
-        $this->view->load('singer/edit', $data);
+        $this->view->load('singers/edit', $data);
     }
 
     /**
@@ -85,7 +85,7 @@ class Singer_Controller extends Base_Controller
         $this->model->load('Singer');
         $singer = $this->model->Singer->findById($_POST['id']);
         $this->model->Singer->name = $_POST['name'];
-        $this->model->Singer->mota = $_POST['mota'];          ;
+        $this->model->Singer->mota = $_POST['mota'];
         $singer->update();
 
         go_back();
