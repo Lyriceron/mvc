@@ -2,6 +2,7 @@
 class Comment_Model{
   public $id;
   public $content;
+  public $time;
   public $song_id;
   public $user_id;
 
@@ -18,6 +19,7 @@ class Comment_Model{
             $comment = new Comment_Model();
             $comment->id = $row['id'];
             $comment->content = $row['content'];
+            $comment->time = $row['time'];
             $comment->song_id = $row['song_id'];
             $comment->user_id = $row['user_id'];
 
@@ -29,9 +31,9 @@ class Comment_Model{
 
   public function save(){
     $conn = FT_Database::instance()->getConnection();
-    $stmt = $conn->prepare("INSERT INTO comments (content, song_id, user_id)
-      VALUES (?, ?, ?)");
-    $stmt->bind_param("sii", $this->content, $this->song_id, $this->user_id);
+    $stmt = $conn->prepare("INSERT INTO comments (content, time, song_id, user_id)
+      VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssii", $this->content, $this->time, $this->song_id, $this->user_id);
     $rs = $stmt->execute();
     $this->id = $stmt->insert_id;
     $stmt->close();
@@ -50,6 +52,7 @@ class Comment_Model{
         $comment = new Comment_Model();
             $comment->id = $row['id'];
             $comment->content = $row['content'];
+            $comment->time = $row['time'];
             $comment->song_id = $row['song_id'];
             $comment->user_id = $row['user_id'];
 
@@ -66,8 +69,8 @@ class Comment_Model{
 
   public function update(){
     $conn = FT_Database::instance()->getConnection();
-    $stmt = $conn->prepare("UPDATE comments SET content=?, song_id=?, user_id=? WHERE id=?");
-    $stmt->bind_param("siii", $this->content, $this->song_id, $this->user_id, $_POST['id']);
+    $stmt = $conn->prepare("UPDATE comments SET content=?, time=?, song_id=?, user_id=? WHERE id=?");
+    $stmt->bind_param("ssiii", $this->content, $this->time, $this->song_id, $this->user_id, $_POST['id']);
     $stmt->execute();
     $stmt->close();
   }
