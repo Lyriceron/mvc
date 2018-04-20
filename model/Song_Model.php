@@ -1,11 +1,13 @@
 <?php
  class Song_Model{
   public $id;
-  public $singer_id;
-  public $type_id;
+  public $url;
   public $name;
-  public $image;
-  public $lyric;
+  public $id_albuml_detail;
+  public $id_image;
+  public $id_genre;
+  public $id_artist;
+  public $id_favorite_song;
 
   public function all(){
     $conn = FT_Database::instance()->getConnection();
@@ -19,11 +21,13 @@
     while ($row = mysqli_fetch_assoc($result)){
             $song = new Song_Model();
             $song->id = $row['id'];
-            $song->singer_id = $row['singer_id'];
-            $song->type_id = $row['type_id'];
+            $song->url = $row['url'];
             $song->name = $row['name'];
-            $song->image = $row['image'];
-            $song->lyric = $row['lyric'];
+            $song->id_albuml_detail = $row['id_albuml_detail'];
+            $song->id_image = $row['id_image'];
+            $song->id_genre = $row['id_genre'];
+            $song->id_artist = $row['id_artist'];
+            $song->id_favorite_song = $row['id_favorite_song'];
             $list_song[] = $song;
         }
 
@@ -32,9 +36,9 @@
 
   public function save(){
     $conn = FT_Database::instance()->getConnection();
-    $stmt = $conn->prepare("INSERT INTO songs (singer_id, type_id, name, image, lyric)
-      VALUES ('?, ?, ?, ?, ?)");
-    $stmt->bind_param("iisss", $this->singer_id, $this->type_id, $this->name, $this->image, $this->lyric);
+    $stmt = $conn->prepare("INSERT INTO songs (url, name, id_albuml_detail, id_image, id_genre, id_artist, id_favorite_song)
+      VALUES ('?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssiiiii", $this->url, $this->name, $this->id_albuml_detail, $this->id_image, $this->id_genre, $this->id_artist, $this->id_favorite_song);
     $rs = $stmt->execute();
     $this->id = $stmt->insert_id;
     $stmt->close();
@@ -52,11 +56,13 @@
     $row = mysqli_fetch_assoc($result);
         $song = new Song_Model();
             $song->id = $row['id'];
-            $song->singer_id = $row['singer_id'];
-            $song->type_id = $row['type_id'];
+            $song->url = $row['url'];
             $song->name = $row['name'];
-            $song->image = $row['image'];
-            $song->lyric = $row['lyric'];
+            $song->id_albuml_detail = $row['id_albuml_detail'];
+            $song->id_image = $row['id_image'];
+            $song->id_genre = $row['id_genre'];
+            $song->id_artist = $row['id_artist'];
+            $song->id_favorite_song = $row['id_favorite_song'];
 
         return $song;
   }
@@ -71,9 +77,9 @@
 
   public function update(){
     $conn = FT_Database::instance()->getConnection();
-    $stmt = $conn->prepare("UPDATE songs SET singer_id=?, type_id=?, name=? image=? lyric=?
+    $stmt = $conn->prepare("UPDATE songs SET url=?, name=?, id_albuml_detail=? id_image=? id_genre=?, id_artist=?, id_favorite_song=?
       WHERE id=?");
-    $stmt->bind_param("iisssi", $this->singer_id, $this->type_id, $this->name, $this->image, $this->lyric, $_POST['id']);
+    $stmt->bind_param("ssiiiiii", $this->url, $this->name, $this->id_albuml_detail, $this->id_image, $this->id_genre, $this->id_artist, $this->id_favorite_song $_POST['id']);
     $stmt->execute();
     $stmt->close();
   }
